@@ -10,19 +10,16 @@ Assignment 5
 * Main 
 */
 
-#include "bst.h"
+#include "Simulation.h"
+
 
 int main(int argc, char** argv)
 {
-    BST<int> *tree = new BST<int>();
 
-    tree->insert(5);
-    tree->insert(30);
-    tree->insert(1000);
-    tree->insert(3);
-    tree->insert(10);
-    tree->insert(200);
-    tree->printNodesInorder();
+    Simulation *sim = new Simulation();
 
+    sim->runSimulation();
+    
+    delete sim;
     return 0;
 }
