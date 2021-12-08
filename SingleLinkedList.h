@@ -49,9 +49,9 @@ class SingleLinkedList{
         ListNode<T>* getFront(); 
         void insertFront(T d);
         T removeFront();
-        T removeNode(T d);
+        ListNode<T>* removeNode(T d);
         // int deleteAtPos(int pos);
-        T find(T d);
+        ListNode<T>* find(T d);
         bool isEmpty();
         unsigned int getSize();
         void printList();
@@ -110,12 +110,12 @@ T SingleLinkedList<T>::removeFront(){
 }
 
 template <class T>
-T SingleLinkedList<T>::find(T d){
-    int pos = -1;
+ListNode<T>* SingleLinkedList<T>::find(T d){
+    //int pos = -1;
 
     ListNode<T>* curr = front;
     while (curr != NULL){
-        ++pos;
+        //++pos;
         if(curr->data == d){
             //return pos;
             break;
@@ -124,11 +124,11 @@ T SingleLinkedList<T>::find(T d){
     }
     //check if curr is NULL which signifies value not in linked list
     if(curr == NULL){
-        pos = NULL; // or -1
+        //pos = NULL; // or -1
         return NULL;
     }
 
-    ListNode<T> temp = curr;
+    ListNode<T>* temp = curr;
     delete curr;
     return temp;
 }
@@ -143,39 +143,8 @@ unsigned int SingleLinkedList<T>::getSize(){
     return size;
 }
 
-// template <class T>
-// int SingleLinkedList::deleteAtPos(int pos){
-    
-//     //error checking to verify we have a valid position
-//     int nodePosition = 0;
-//     ListNode *curr = front;
-//     ListNode *prev = front;
-
-//     while (nodePosition != pos){
-//         ++nodePosition;
-//         prev = curr;
-//         curr = curr->next;
-//     }
-
-//     // I found it
-
-//     //check if it's front
-//         //skjfh
-//     //check if its back 
-
-//     //else it's in between front and back
-//     prev->next = curr->next;
-//     curr->next = NULL;
-//     int d = curr->data;
-//     --size;
-
-//     delete curr;
-//     return d;
-
-// }
-
 template <class T>
-T SingleLinkedList<T>::removeNode(T value){
+ListNode<T>* SingleLinkedList<T>::removeNode(T value){
     ListNode<T>* node = find(value); //find the node and verify it exists
 
     if(node == NULL){
@@ -203,7 +172,7 @@ T SingleLinkedList<T>::removeNode(T value){
     }
 
     --size;
-    return curr->data;
+    return curr;
 }
 
 template <class T>

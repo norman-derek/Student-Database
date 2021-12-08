@@ -21,7 +21,7 @@ class Database {
         void printFacultyAdvisor(int studentID); // given a students id it prints the name and info of their faculty advisor
         void printAdviseesOfFaculty(int facultyID); // given a faculty id it prints all the names and infor of his/her advisees 
         void changeStudentsAdvisor(int studentID, int facultyID); //change a students advisor given the student id and the new faculty id.
-        void removeAdvisee(int facultyMember, int studentToRemove); //removes an advisee from a faculty member given the ids
+        void removeAdvisee(int facultyID, int studentID); //removes an advisee from a faculty member given the ids
 
 
 

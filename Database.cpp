@@ -15,7 +15,7 @@ Database::~Database(){
 void Database::addStudent(Student *student){
     if(student->getAdvisorID() == 0){
         masterStudent->insert(student);
-        
+
     } else if(findFaculty(student->getAdvisorID()) == nullptr){
         cout << "please try inserting student with ID of advisor who exists!" << endl;
 
@@ -116,6 +116,38 @@ void Database::printAdviseesOfFaculty(int facultyID){
             }
         }
 
+    }
+}
+
+void Database::changeStudentsAdvisor(int studentID, int facultyID){
+    Student *student = findStudent(studentID);
+
+    if(student == nullptr){
+        cout << "Student with that ID does not exist..." << endl;
+    } else {
+        Faculty *faculty = findFaculty(facultyID);
+        if(faculty == nullptr){
+            cout << "Cannot change students advisor ID because a Faculty member with " << facultyID << " does not exist" << endl;
+        } else {
+            student->setAdvisorID(facultyID);
+            faculty->getAdviseeList()->insertFront(studentID);
+        }
+    }
+}
+
+void Database::removeAdvisee(int facultyID, int studentID){
+    Faculty *faculty = findFaculty(facultyID);
+
+    if(faculty == nullptr){
+        cout << "Faculty with that ID does not exist..." << endl;
+    } else {
+        Student *student = findStudent(studentID);
+        if(student == nullptr){
+            cout << "Cannot remove advisee because the student does not exist in database" << endl;
+        } else {
+            faculty->getAdviseeList()->removeNode(studentID);
+            student->setAdvisorID(0);
+        }
     }
 }
 

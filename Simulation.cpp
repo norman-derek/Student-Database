@@ -63,7 +63,7 @@ void Simulation::runSimulation(){
         cout << "1. Print all students and their information (sorted by ascending id #)" << endl;
         cout << "2. Print all faculty and their information (sorted by ascending id #)" << endl;
         cout << "3. Find and display student information given the students id" << endl;
-        cout << "4. Find and displat faculty information given the faculty id" << endl;
+        cout << "4. Find and display faculty information given the faculty id" << endl;
         cout << "5. Given a student's id, print the name and information of their faculty advisor" << endl;
         cout << "6. given a faculty id, print ALL the names and information of his/her advisees" << endl;
         cout << "7. Add a new student" << endl;
@@ -123,12 +123,16 @@ void Simulation::runSimulation(){
             string id;
             cin >> id;
             cout << endl;
-            if(db->findFaculty(stol(id)) == nullptr){
-                cout << "Sorry no faculty found with that ID" << endl;
+            if(isInteger(id)){
+                if(db->findFaculty(stol(id)) == nullptr){
+                    cout << "Sorry no student found with that ID" << endl;
+                } else {
+                    db->findFaculty(stol(id))->Print();
+                }
             } else {
-                db->findFaculty(stol(id))->Print();
+                cout << "Not a valid id!" << endl;
+                cout << "Please try again with a valid id..." << endl;
             }
-            
 
             cout << endl << "Press any key to continue..." << endl;
             cin.ignore();
@@ -140,13 +144,17 @@ void Simulation::runSimulation(){
             string id;
             cin >> id;
             cout << endl;
-            if(db->findStudent(stol(id)) == nullptr){
-                cout << "Sorry no student found with that ID" << endl;
-            } else if (db->findFaculty(db->findStudent(stol(id))->getAdvisorID()) == nullptr ){
-                cout << "Sorry the faculty member the student has listed does not exist!" << endl;
+            if(isInteger(id)){
+                if(db->findStudent(stol(id)) == nullptr){
+                    cout << "Sorry no student found with that ID" << endl;
+                } else if (db->findFaculty(db->findStudent(stol(id))->getAdvisorID()) == nullptr ){
+                    cout << "Sorry the faculty member the student has listed does not exist!" << endl;
 
+                } else {
+                    db->printFacultyAdvisor(stol(id));
+                }
             } else {
-                db->printFacultyAdvisor(stol(id));
+                cout << "Invalid ID, Please try again..." << endl;
             }
 
             cout << "Press any key to continue..." << endl;
@@ -159,9 +167,18 @@ void Simulation::runSimulation(){
             string id;
             cin >> id;
             cout << endl;
-            db->printAdviseesOfFaculty(stol(id));
+            if(isInteger(id)){
+                if(db->findFaculty(stol(id)) == nullptr){
+                    cout << "Faculty with that ID not found, please try again..." << endl;
+                } else {
+                    db->printAdviseesOfFaculty(stol(id));
+                }
+            } else {
+                cout << "Invalid ID, Please try again..." << endl;
+            }
 
             cout << "Press any key to continue..." << endl;
+            cin.ignore();
             cin.ignore();
         } else if (input == "7"){
             cout << string (50, '\n');
@@ -197,9 +214,13 @@ void Simulation::runSimulation(){
             cin >> advisorID;
             cout << endl;
 
-            Student *newStudent = new Student(stol(id), name, level, major, gpa, stol(advisorID));
+            if(isInteger(id)){
+                Student *newStudent = new Student(stol(id), name, level, major, gpa, stol(advisorID));
 
-            db->addStudent(newStudent);
+                db->addStudent(newStudent);
+            } else {
+                cout << "STUDENT NOT CREATED!!!!" << endl << "Please try again, invalid ID input" << endl;
+            }
 
             cout << "Press any key to continue..." << endl;
             cin.ignore();
@@ -209,13 +230,23 @@ void Simulation::runSimulation(){
             cout << string(50, '\n');
             cout << "Delete a student given the id" << endl;
             cout << "Please input student id: ";
-            int id;
+            string id;
             cin >> id;
             cout << endl;
 
-            db->deleteStudent(id);
+            if (isInteger(id)){
+                if(db->findStudent(stol(id)) == nullptr){
+                    cout << "Student with that ID does not exist!" << endl;
+                } else {
+                    db->deleteStudent(stol(id));
+                }
+            } else {
+                cout << "Invalid ID, please try again..." << endl;
+            }
+            
 
             cout << "Press any key to continue..." << endl;
+            cin.ignore();
             cin.ignore();
         } else if(input == "9") {
             cout << string(50, '\n');
@@ -244,9 +275,6 @@ void Simulation::runSimulation(){
             cout << endl;
 
 
-            // cout << "Press any key to continue..." << endl;
-            // cin.ignore();
-
             int adviseeID;
             SingleLinkedList<int>* adviseeIDList = new SingleLinkedList<int>();
 
@@ -265,14 +293,104 @@ void Simulation::runSimulation(){
                 adviseeID = stol(word);
                 adviseeIDList->insertFront(adviseeID);
             }
-            
-            Faculty *f = new Faculty(stol(id), name, level, department, adviseeIDList);
 
-            db->addFaculty(f);
+            if (isInteger(id)){
+                Faculty *f = new Faculty(stol(id), name, level, department, adviseeIDList);
+
+                db->addFaculty(f);
+
+            } else {
+                cout << "FACULTY NOT CREATED!!!!" << endl;
+                cout << "Please try again and make sure you correctly input information" << endl;
+            }
+            
 
             cout << "Press any key to continue..." << endl;
             cin.ignore();
 
+        } else if (input == "10") {
+            cout << string(50, '\n');
+            cout << "Delete a faculty member given the id" << endl;
+            cout << "Please input faculty id: ";
+            string id;
+            cin >> id;
+            cout << endl;
+
+            if (isInteger(id)){
+                if(db->findFaculty(stol(id)) == nullptr){
+                    cout << "Faculty with that ID does not exist!" << endl;
+                } else {
+                    db->deleteFaculty(stol(id));
+                }
+            } else {
+                cout << "Invalid ID, please try again..." << endl;
+            }
+            
+
+            cout << "Press any key to continue..." << endl;
+            cin.ignore();
+            cin.ignore();
+
+        } else if (input == "11"){
+            cout << string(50, '\n');
+            cout << "Change a student's advisor given the student id and the new faculty id" << endl;
+            cout << "Please input student ID: ";
+            string studentID;
+            cin >> studentID;
+            cout << "Please input faculty ID: ";
+            string facultyID;
+            cin >> facultyID;
+            cout << endl;
+
+            if (isInteger(studentID) && isInteger(facultyID)){
+                if(db->findStudent(stoi(studentID)) == nullptr){
+                    cout << "Student not found please try again..." << endl;
+                } else {
+                    db->changeStudentsAdvisor(stoi(studentID), stoi(facultyID));
+                }
+            } else {
+                cout << "Invalid ID input for one of the two. Please try again..." << endl;
+            }
+
+            cout << endl << "Press any key to continue..." << endl;
+            cin.ignore();
+            cin.ignore();
+
+        } else if (input == "12"){
+            cout << string(50, '\n');
+            cout << "Remove an advisee from a faculty member given the ids" << endl;
+            cout << "Please input faculty ID: ";
+            string facultyID;
+            cin >> facultyID;
+            cout << "Please input student ID: ";
+            string studentID;
+            cin >> studentID;
+            cout << endl;
+
+            if(isInteger(facultyID) && isInteger(studentID)){
+                if(db->findFaculty(stoi(facultyID)) == nullptr){
+                    cout << "Faculty not found please try again..." << endl;
+                } else {
+                    if(db->findStudent(stoi(studentID)) == nullptr){
+                        cout << "Student does not exist, cannot remove from faculty advisee list" << endl;
+                    } else {
+                        db->removeAdvisee(stoi(facultyID), stoi(studentID));
+                    }
+
+                }
+            } else {
+                cout << "Invalid ID input for one of the two. Please try again..." << endl;
+            }
+
+            cout << endl << "Press any key to continue..." << endl;
+            cin.ignore();
+            cin.ignore();
+        } else if (input == "13"){
+            cout << string(50, '\n');
+            cout << "Oops rollback currently does not work :(" << endl;
+            cout << endl << "Press any key to continue..." << endl;
+            cin.ignore();
+            cin.ignore();
         } else if (input == "14"){
             cout << "exiting..." << endl;
         } else {
