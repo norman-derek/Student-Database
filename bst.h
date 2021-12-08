@@ -1,3 +1,14 @@
+/* 
+Derek Norman
+2364922
+norman@chapman.edu
+CPSC-350-03
+Assignment 5
+*/
+
+/*
+* Template class for binary search tree
+*/
 #ifndef BST_H
 #define BST_H
 #include <iostream>
@@ -17,21 +28,21 @@ class TreeNode{
 };
 
 template <class T>
-TreeNode<T>::TreeNode(){
+TreeNode<T>::TreeNode(){ //constructor
     left = NULL;
     right = NULL;
     key = NULL;
 }
 
 template <class T> 
-TreeNode<T>::TreeNode(T k){
+TreeNode<T>::TreeNode(T k){ //overloaded constructor
     left = NULL;
     right = NULL;
     key = k;
 }
 
 template <class T>
-TreeNode<T>::~TreeNode(){
+TreeNode<T>::~TreeNode(){ //destructor
     left = NULL;
     right = NULL;
 }
@@ -62,16 +73,20 @@ class BST{
 };
 
 template <class T>
-BST<T>::BST(){
+BST<T>::BST(){ //constructor
     root = NULL;
 }
 
 template <class T>
-BST<T>::~BST(){
+BST<T>::~BST(){ //destructor
     recDelete(root);
     root = NULL;
 }
 
+/*
+* method recPrint, recursivley prints the nodes in the BST
+* Takes single parameter of TreeNode pointer representing the node to start at
+*/
 template <class T>
 void BST<T>::recPrint(TreeNode<T> *node){
     if(node == NULL){
@@ -83,6 +98,10 @@ void BST<T>::recPrint(TreeNode<T> *node){
     recPrint(node->right);
 }
 
+/*
+* method recInorderPrint, traverses the tree recursivley inorder
+* Takes single parameter, node, of TreeNode<T> representing the node to start at
+*/
 template <class T>
 void BST<T>::recInorderPrint(TreeNode<T> *node){
     if(node == NULL){
@@ -94,6 +113,10 @@ void BST<T>::recInorderPrint(TreeNode<T> *node){
     recInorderPrint(node->right);
 }
 
+/*
+* method recPostorderPrint, recursivley traverses the bst postorder
+* Takes single parameter of TreeNode<T>* representing the node to start at
+*/
 template <class T>
 void BST<T>::recPostorderPrint(TreeNode<T> *node){
     if(node == NULL){
@@ -105,6 +128,10 @@ void BST<T>::recPostorderPrint(TreeNode<T> *node){
     recPostorderPrint(node->left);
 }
 
+/*
+* method recDelete, recursivley traverses tree to delete nodes. 
+* Takes single parameter TreeNode<T>* representing the node to start at
+*/
 template <class T>
 void BST<T>::recDelete(TreeNode<T> *node){
     if(node == NULL){
@@ -116,27 +143,44 @@ void BST<T>::recDelete(TreeNode<T> *node){
     delete node;
 }
 
+/*
+* method printNodes, prints the entire tree
+*/
 template <class T>
 /* this function prints the entire tree */
 void BST<T>::printNodes(){
     recPrint(root);
 }
 
+/*
+* method printNodesInorder, prints the BST in ascending order
+*/
 template <class T>
 void BST<T>::printNodesInorder(){
     recInorderPrint(root);
 }
 
+/*
+* method printNodesPostorder, prints the BST in descending order
+*/
 template <class T>
 void BST<T>::printNodesPostorder(){
     recPostorderPrint(root);
 }
 
+/*
+* method isEmpty, returns if the BST is empty or not
+* returns a bool representing if the BST is empty or not
+*/
 template <class T>
 bool BST<T>::isEmpty(){
     return (root == NULL);
 }
 
+/*
+* method getMin, returns the min of the BST
+* Returns T* representing a pointer to the min node
+*/
 template <class T>
 T* BST<T>::getMin(){
     if(isEmpty()){
@@ -151,6 +195,10 @@ T* BST<T>::getMin(){
     return &(current->key);
 }
 
+/*
+* method getMax, returns the max of the BST
+* Returns T* representing a pointer to the max node
+*/
 template <class T>
 T* BST<T>::getMax(){
     if(isEmpty()){
@@ -165,6 +213,10 @@ T* BST<T>::getMax(){
     return &(current->key);
 }
 
+/*
+* method insert, inserts a node in the BST
+* Takes a single parameter T, representing the data to be inserted in the tree
+*/
 template <class T>
 void BST<T>::insert(T value){
     TreeNode<T> *node = new TreeNode<T>(value);
@@ -220,6 +272,11 @@ void BST<T>::insert(T value){
 //     return true;
 // }
 
+/*
+* method contains, checks if the BST contains a piece of data and if it does returns it otherwise it returns null
+* Takes single parameter T representing the data you want to check if the BST contains
+* Returns T, representing the data that you are checking if the BST contains, returns null if the BST does not contain the input data
+*/
 template <class T>
 T BST<T>::contains(T value){
     if(isEmpty()){
@@ -244,7 +301,11 @@ T BST<T>::contains(T value){
     return data;
 }
 
-
+/*
+* method deleteNode, deletes the node given the data
+* Takes single parameter T, representing the node to delete from the BST
+* Returns a bool representing whether or not the node was able to be deleted
+*/
 template <class T>
 bool BST<T>::deleteNode(T k){
     if(isEmpty()){
@@ -333,6 +394,11 @@ bool BST<T>::deleteNode(T k){
 
 }
 
+/*
+* method getSucccessor, get the successor of a node in the BST
+* Takes single parameter d representing the node you want the successor of
+* returns TreeNode<T>* representing the successor of the node
+*/
 template <class T>
 /* d represents the node to be delete */
 TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d){

@@ -1,63 +1,21 @@
 #include "Simulation.h"
 
-Simulation::Simulation(){
+Simulation::Simulation(){ //constructor
     db = new Database();
 }
 
-Simulation::~Simulation(){
+Simulation::~Simulation(){ //destructor
     delete db;
 }
 
-void Simulation::runSimulation(){
-    // Student *one = new Student(2364922, "Derek", "Sophmore", "Computer Science", 3.5, 425435);
-    // Student *two = new Student(12275073, "Alexa", "Sophmore", "Mathematics", 3.0, 214);
-    // Student *three = new Student(1, "Alexa", "Sophmore", "Mathematics", 3.0, 214);
-
-
-    // SingleLinkedList<int> *adviseeList = new SingleLinkedList<int>();
-
-    // adviseeList->insertFront(2364922);
-    // adviseeList->insertFront(12275073);
-    // adviseeList->insertFront(23423);
-    // adviseeList->insertFront(3242345);
-
-    // Faculty *fone = new Faculty(425435, "Dr. man", "Professor", "Mathematics", adviseeList);
-    // Faculty *ftwo = new Faculty(214, "Professor Jipsen", "Assistant Professor", "Chemistry", adviseeList);
-
-
-
-    // Database *test = new Database();
-
-    // test->addFaculty(fone);
-    // test->addFaculty(ftwo);
-
-    // cout << "=============== Print Faculty Database =============" << endl;
-    // test->printFacultyDatabase();
-
-    // test->addStudent(one);
-    // test->addStudent(two);
-    // test->addStudent(three);
-
-    // cout << "============= Print student database =========" << endl;
-    // test->printStudentDatabase();
-
-    // cout << "================= FIND STUDENT TEST =================" << endl;
-    // test->findStudent(2364922);
-
-    // cout << endl;
-    // cout << "=============== FIND FACULTY TEST ==================" << endl;
-    // test->findFaculty(425435);
-
-    // cout << endl;
-    // cout << "================ PRINT FACULTY ADVISOR TEST ==================" << endl;
-    // test->printFacultyAdvisor(2364922);
-
-    // cout << endl;
-    // cout << "============== GET ADVISEE LIST TEST =============" << endl;
-    // test->printAdviseesOfFaculty(425435);
+/*
+*Method runSimulation, runs a simulation and simulates a student database
+*/
+void Simulation::runSimulation(){ // runs the simulation
 
     string input;
     while (input != "14"){
+        //prompt the user for their choice
         cout << string(50, '\n');
         cout << "Hello Please Choose One Of The Options Below...(please input corresponding number from list)" << endl;
         cout << "1. Print all students and their information (sorted by ascending id #)" << endl;
@@ -75,39 +33,39 @@ void Simulation::runSimulation(){
         cout << "13. Rollback" << endl;
         cout << "14. Exit" << endl;
         
-        cin >> input;        
+        cin >> input;  //takes user choice  
 
-        if(input == "1"){
-            cout << string(50, '\n');
+        if(input == "1"){ //if user choice is equal to 1
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Print All student and the information (sorted by ascending id #)" << endl;
-            db->printStudentDatabase();
+            db->printStudentDatabase(); // prints the student table by ascending id #
 
             cout << endl << "Press any key to continue..." << endl;
             cin.ignore();
             cin.ignore();
             
         } else if (input == "2"){
-            cout << string(50, '\n');
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Print all faculty and their information (sorted by ascending id #)" << endl;
-            db->printFacultyDatabase();
+            db->printFacultyDatabase(); // prints the faculty table by ascending id #
 
             cout << endl << "Press any key to continue..." << endl;
             cin.ignore();
             cin.ignore();
         } else if (input == "3"){
-            cout << string(50, '\n');
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Find and display student information given the students id" << endl;
             cout << "Please provide id: ";
             string id;
             cin >> id;
             cout << endl;
-            if(isInteger(id)){
-                if(db->findStudent(stol(id)) == nullptr){
-                    cout << "Sorry no student found with that ID" << endl;
+            if(isInteger(id)){ //if the id is a valid integer 
+                if(db->findStudent(stol(id)) == nullptr){ //check if the student exists
+                    cout << "Sorry no student found with that ID" << endl; //student does not exist
                 } else {
-                    db->findStudent(stol(id))->Print();
+                    db->findStudent(stol(id))->Print(); //Print students information
                 }
-            } else {
+            } else { //Input ID is not valid
                 cout << "Not a valid id!" << endl;
                 cout << "Please try again with a valid id..." << endl;
             }
@@ -117,19 +75,19 @@ void Simulation::runSimulation(){
             cin.ignore();
             cin.ignore();
         } else if (input == "4"){
-            cout << string(50, '\n');
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Find and display faculty information given the faculty id" << endl;
             cout << "Please input faculty id: ";
             string id;
             cin >> id;
             cout << endl;
             if(isInteger(id)){
-                if(db->findFaculty(stol(id)) == nullptr){
-                    cout << "Sorry no student found with that ID" << endl;
+                if(db->findFaculty(stol(id)) == nullptr){ //check if faculty memeber exists
+                    cout << "Sorry no student found with that ID" << endl; //faculty member does not exist
                 } else {
-                    db->findFaculty(stol(id))->Print();
+                    db->findFaculty(stol(id))->Print(); //Print faculty member and information
                 }
-            } else {
+            } else { //input ID is not valid
                 cout << "Not a valid id!" << endl;
                 cout << "Please try again with a valid id..." << endl;
             }
@@ -138,22 +96,22 @@ void Simulation::runSimulation(){
             cin.ignore();
             cin.ignore();
         } else if (input == "5"){
-            cout << string(50, '\n');
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Given a student's id, print the name and information of their faculty advisor" << endl;
             cout << "Please provide student id: ";
             string id;
             cin >> id;
             cout << endl;
-            if(isInteger(id)){
-                if(db->findStudent(stol(id)) == nullptr){
-                    cout << "Sorry no student found with that ID" << endl;
-                } else if (db->findFaculty(db->findStudent(stol(id))->getAdvisorID()) == nullptr ){
-                    cout << "Sorry the faculty member the student has listed does not exist!" << endl;
+            if(isInteger(id)){ //if the input id is an integer 
+                if(db->findStudent(stol(id)) == nullptr){ // if the student exists 
+                    cout << "Sorry no student found with that ID" << endl; //student does not exist
+                } else if (db->findFaculty(db->findStudent(stol(id))->getAdvisorID()) == nullptr ){ // if the faculty exists
+                    cout << "Sorry the faculty member the student has listed does not exist!" << endl; //faculty does not exist
 
-                } else {
-                    db->printFacultyAdvisor(stol(id));
+                } else { //student and faculty both exist
+                    db->printFacultyAdvisor(stol(id)); //print the faculty advisor of the student
                 }
-            } else {
+            } else { //input ID is not a valid integer
                 cout << "Invalid ID, Please try again..." << endl;
             }
 
@@ -161,19 +119,19 @@ void Simulation::runSimulation(){
             cin.ignore();
             cin.ignore();
         } else if (input == "6"){
-            cout << string(50, '\n');
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "given a faculty id, print ALL the names and information of his/her advisees" << endl;
             cout << "Please provide faculty id: ";
             string id;
             cin >> id;
             cout << endl;
-            if(isInteger(id)){
-                if(db->findFaculty(stol(id)) == nullptr){
-                    cout << "Faculty with that ID not found, please try again..." << endl;
+            if(isInteger(id)){ // if input id is a valid integer
+                if(db->findFaculty(stol(id)) == nullptr){ //if the faculty member exists
+                    cout << "Faculty with that ID not found, please try again..." << endl; //faculty member does not exist
                 } else {
-                    db->printAdviseesOfFaculty(stol(id));
+                    db->printAdviseesOfFaculty(stol(id)); //print advisee list of the faculty member
                 }
-            } else {
+            } else { //input is not a valid integer 
                 cout << "Invalid ID, Please try again..." << endl;
             }
 
@@ -181,7 +139,7 @@ void Simulation::runSimulation(){
             cin.ignore();
             cin.ignore();
         } else if (input == "7"){
-            cout << string (50, '\n');
+            cout << string (50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Add a new student" << endl;
 
             string id;
@@ -214,11 +172,11 @@ void Simulation::runSimulation(){
             cin >> advisorID;
             cout << endl;
 
-            if(isInteger(id)){
-                Student *newStudent = new Student(stol(id), name, level, major, gpa, stol(advisorID));
+            if(isInteger(id) && isInteger(advisorID)){ //if input id is a valid integer and input advisorID is a valid integer
+                Student *newStudent = new Student(stol(id), name, level, major, gpa, stol(advisorID)); //create new student
 
-                db->addStudent(newStudent);
-            } else {
+                db->addStudent(newStudent); //add student to student table
+            } else { //if student id or advisor id is not a valid integer
                 cout << "STUDENT NOT CREATED!!!!" << endl << "Please try again, invalid ID input" << endl;
             }
 
@@ -227,20 +185,20 @@ void Simulation::runSimulation(){
             cin.ignore();
             
         } else if (input == "8"){
-            cout << string(50, '\n');
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Delete a student given the id" << endl;
             cout << "Please input student id: ";
             string id;
             cin >> id;
             cout << endl;
 
-            if (isInteger(id)){
-                if(db->findStudent(stol(id)) == nullptr){
-                    cout << "Student with that ID does not exist!" << endl;
+            if (isInteger(id)){ //if input id is a valid integer
+                if(db->findStudent(stol(id)) == nullptr){ // if the student with id exists
+                    cout << "Student with that ID does not exist!" << endl; //student does not exist
                 } else {
-                    db->deleteStudent(stol(id));
+                    db->deleteStudent(stol(id)); //student exists and deletes student from student table
                 }
-            } else {
+            } else { //input ID is not a valid ID
                 cout << "Invalid ID, please try again..." << endl;
             }
             
@@ -249,7 +207,7 @@ void Simulation::runSimulation(){
             cin.ignore();
             cin.ignore();
         } else if(input == "9") { // if their option is 9
-            cout << string(50, '\n');
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Add a new faculty member" << endl; //add new faculty member
             cout << "Please input faculty ID: ";
             cin.ignore();
@@ -275,15 +233,15 @@ void Simulation::runSimulation(){
             cout << endl;
 
 
-            int adviseeID;
-            SingleLinkedList<int>* adviseeIDList = new SingleLinkedList<int>();
+            int adviseeID; //will be used to create advisee id list
+            SingleLinkedList<int>* adviseeIDList = new SingleLinkedList<int>(); //creates advisee id list for faculty member
 
             if(!adviseeList.empty()){ //this takes string of advisee id split up by spaces and adds the ids to the advisee list
                 string word;
-                for(int i = 0; i < adviseeList.length(); ++i){
-                    if(!isspace(adviseeList[i])){
+                for(int i = 0; i < adviseeList.length(); ++i){ //loops through the input id for the advisee list
+                    if(!isspace(adviseeList[i])){ //add each character to a word because overall word will be the complete id
                         word += adviseeList[i];
-                    } else {
+                    } else { //on white space add the ID to the advisee id list
                         adviseeID = stol(word);
                         adviseeIDList->insertFront(adviseeID);
                         word = "";
@@ -291,28 +249,26 @@ void Simulation::runSimulation(){
                 }
 
                 adviseeID = stol(word);
-                adviseeIDList->insertFront(adviseeID);
+                adviseeIDList->insertFront(adviseeID); //insert id into list
             }
 
             ListNode<int>* curr = adviseeIDList->getFront();
-            for(int i = 0; i < adviseeIDList->getSize(); ++i){ //makes sure the student exists in the student table before adding it to the advisee list
-                if(db->findStudent(curr->data) == nullptr){
-                    cout << "Student " << curr->data << " does not exist and cannot add that student into advisee list" << endl;
-                    adviseeIDList->removeNode(curr->data);
-                } else {
-                    
-                }
+            for(int i = 0; i < adviseeIDList->getSize(); ++i){ //makes sure the student exists and if they dont removing them from the advisee list
+                if(db->findStudent(curr->data) == nullptr){//if the student ecists
+                    cout << "Student " << curr->data << " does not exist and cannot add that student into advisee list" << endl; 
+                    adviseeIDList->removeNode(curr->data); //student doesnt exist in the student table so we remove the ID from advisee id list
+                } 
 
                 curr = curr->next;
             }
 
-            if (isInteger(id)){
-                Faculty *f = new Faculty(stol(id), name, level, department, adviseeIDList);
+            if (isInteger(id)){ // if id is a valid integer
+                Faculty *f = new Faculty(stol(id), name, level, department, adviseeIDList); //create new faculty member
 
-                db->addFaculty(f);
+                db->addFaculty(f); // add faculty member to faculty table
 
-            } else {
-                cout << "FACULTY NOT CREATED!!!!" << endl;
+            } else { //if input id is not a valid id
+                cout << "FACULTY NOT CREATED!!!!" << endl; //faculty member not created and tells user to try again
                 cout << "Please try again and make sure you correctly input information" << endl;
             }
             
@@ -320,21 +276,21 @@ void Simulation::runSimulation(){
             cout << "Press any key to continue..." << endl;
             cin.ignore();
 
-        } else if (input == "10") {
-            cout << string(50, '\n');
+        } else if (input == "10") { //if input is equal to 10
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Delete a faculty member given the id" << endl;
             cout << "Please input faculty id: ";
             string id;
             cin >> id;
             cout << endl;
 
-            if (isInteger(id)){
-                if(db->findFaculty(stol(id)) == nullptr){
-                    cout << "Faculty with that ID does not exist!" << endl;
+            if (isInteger(id)){ // if input id is a valid integer 
+                if(db->findFaculty(stol(id)) == nullptr){ //if faculty exists
+                    cout << "Faculty with that ID does not exist!" << endl; //faculty does not exist
                 } else {
-                    db->deleteFaculty(stol(id));
+                    db->deleteFaculty(stol(id)); //faculty exists and delete faculty from faculty table
                 }
-            } else {
+            } else { //if input id is not a valid integer
                 cout << "Invalid ID, please try again..." << endl;
             }
             
@@ -344,7 +300,7 @@ void Simulation::runSimulation(){
             cin.ignore();
 
         } else if (input == "11"){
-            cout << string(50, '\n');
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Change a student's advisor given the student id and the new faculty id" << endl;
             cout << "Please input student ID: ";
             string studentID;
@@ -354,13 +310,13 @@ void Simulation::runSimulation(){
             cin >> facultyID;
             cout << endl;
 
-            if (isInteger(studentID) && isInteger(facultyID)){
-                if(db->findStudent(stoi(studentID)) == nullptr){
-                    cout << "Student not found please try again..." << endl;
-                } else {
-                    db->changeStudentsAdvisor(stoi(studentID), stoi(facultyID));
+            if (isInteger(studentID) && isInteger(facultyID)){ //if student id and faculty id are both valid ids
+                if(db->findStudent(stoi(studentID)) == nullptr){ // if student exists
+                    cout << "Student not found please try again..." << endl; //student doesn't exist
+                } else { //student exists
+                    db->changeStudentsAdvisor(stoi(studentID), stoi(facultyID)); //student exists and we change students advisor
                 }
-            } else {
+            } else { //one or both of input ids were not a valid integer
                 cout << "Invalid ID input for one of the two. Please try again..." << endl;
             }
 
@@ -369,7 +325,7 @@ void Simulation::runSimulation(){
             cin.ignore();
 
         } else if (input == "12"){
-            cout << string(50, '\n');
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Remove an advisee from a faculty member given the ids" << endl;
             cout << "Please input faculty ID: ";
             string facultyID;
@@ -379,31 +335,31 @@ void Simulation::runSimulation(){
             cin >> studentID;
             cout << endl;
 
-            if(isInteger(facultyID) && isInteger(studentID)){
-                if(db->findFaculty(stoi(facultyID)) == nullptr){
-                    cout << "Faculty not found please try again..." << endl;
-                } else {
-                    if(db->findStudent(stoi(studentID)) == nullptr){
-                        cout << "Student does not exist, cannot remove from faculty advisee list" << endl;
-                    } else {
-                        db->removeAdvisee(stoi(facultyID), stoi(studentID));
+            if(isInteger(facultyID) && isInteger(studentID)){ // check if faculty id and student id are valid ids
+                if(db->findFaculty(stoi(facultyID)) == nullptr){ //check if faculty exists
+                    cout << "Faculty not found please try again..." << endl; //faculty doesn't exist
+                } else { //faculty exists
+                    if(db->findStudent(stoi(studentID)) == nullptr){ //check if student exists
+                        cout << "Student does not exist, cannot remove from faculty advisee list" << endl; //student does not exist
+                    } else { //student exists
+                        db->removeAdvisee(stoi(facultyID), stoi(studentID)); //removes the advisee from the faculty and updates student and faculty variables appropriatley 
                     }
 
                 }
-            } else {
+            } else { //one or both provided ids were not a valid integer
                 cout << "Invalid ID input for one of the two. Please try again..." << endl;
             }
 
             cout << endl << "Press any key to continue..." << endl;
             cin.ignore();
             cin.ignore();
-        } else if (input == "13"){
-            cout << string(50, '\n');
+        } else if (input == "13"){ // rollback option is chosen
+            cout << string(50, '\n'); //clears the rest of the screen on terminal to focus on current selection
             cout << "Oops rollback currently does not work :(" << endl;
             cout << endl << "Press any key to continue..." << endl;
             cin.ignore();
             cin.ignore();
-        } else if (input == "14"){
+        } else if (input == "14"){ // option 14 is chosen which exits the simulation
             cout << "exiting..." << endl;
         } else {
             cout << "Sorry you did not choose a valid choice please try again!" << endl;
@@ -417,6 +373,12 @@ void Simulation::runSimulation(){
 
 }
 
+
+/*
+* Method isInteger, checks if a string can be converted into an integer
+* Takes single parameter, s, of type string representing the string to be checked
+* Returns bool representing whether or not the string is an integer
+*/
 bool Simulation::isInteger(string s){
     string num = s;
     for(int i = 0; i < num.size(); ++i){

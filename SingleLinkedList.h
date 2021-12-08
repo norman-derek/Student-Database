@@ -1,3 +1,14 @@
+/* 
+Derek Norman
+2364922
+norman@chapman.edu
+CPSC-350-03
+Assignment 5
+*/
+
+/*
+* Single Linked List template class 
+*/
 #ifndef SINGLELINKEDLIST_H
 #define SINGLELINKEDLIST_H
 
@@ -17,21 +28,20 @@ class ListNode{
 };
 
 template <class T>
-ListNode<T>::ListNode(){
+ListNode<T>::ListNode(){ //constructor
     data = NULL;
     next = NULL;
 };
 
 template <class T>
-ListNode<T>::ListNode(T d){
+ListNode<T>::ListNode(T d){ //overloaded constructor
     data = d;
     next = NULL;
 }
 
 template <class T>
-ListNode<T>::~ListNode(){
-    //research this
-    next = NULL; //is this all we need? idk...
+ListNode<T>::~ListNode(){ //destructor
+    next = NULL; 
 }
 
 
@@ -58,7 +68,7 @@ class SingleLinkedList{
 };
 
 template <class T>
-SingleLinkedList<T>::SingleLinkedList(){
+SingleLinkedList<T>::SingleLinkedList(){ //constructor
     //empty list
     size = 0;
     front = NULL;
@@ -67,7 +77,7 @@ SingleLinkedList<T>::SingleLinkedList(){
 }
 
 template <class T>
-SingleLinkedList<T>::~SingleLinkedList(){
+SingleLinkedList<T>::~SingleLinkedList(){ //destructor
     //research 
     //hint: theres a loop
     ListNode<T>* curr = front;
@@ -79,6 +89,9 @@ SingleLinkedList<T>::~SingleLinkedList(){
     front = 0;
 }
 
+/* 
+* method insertFront, inserts data into the front of the linked list
+*/
 template <class T>
 void SingleLinkedList<T>::insertFront(T d){
     ListNode<T> *node = new ListNode<T>(d);
@@ -88,11 +101,19 @@ void SingleLinkedList<T>::insertFront(T d){
     ++size;
 }
 
+/*
+* method getFront, gets the front of the linked list
+* Returns ListNode<T>* representing the node at the front of the list
+*/
 template <class T>
 ListNode<T>* SingleLinkedList<T>::getFront(){
     return front;
 }
 
+/*
+* method removeFront, removes the node at the front of the list
+* returns T representing the data that was removed from the front of the linked list
+*/
 template <class T>
 T SingleLinkedList<T>::removeFront(){
     //check if empty
@@ -109,6 +130,11 @@ T SingleLinkedList<T>::removeFront(){
     return temp;
 }
 
+/*
+* method find, finds data in the linked list
+* Takes single parameter d, representing the data to be found in the linked list
+* Returns ListNode<T>* representing the data that was found or null if the data was not found
+*/
 template <class T>
 ListNode<T>* SingleLinkedList<T>::find(T d){
     //int pos = -1;
@@ -133,16 +159,29 @@ ListNode<T>* SingleLinkedList<T>::find(T d){
     return temp;
 }
 
+/*
+* method isEmpty, returns if the linked list is empty or not
+* returns bool representing if the list is empty or not
+*/
 template <class T>
 bool SingleLinkedList<T>::isEmpty(){
     return (size == 0);
 }
 
+/*
+* method getSize, returns the size of the linked list
+* returns unsigned int representing the size of the linked list
+*/
 template <class T>
 unsigned int SingleLinkedList<T>::getSize(){
     return size;
 }
 
+/*
+* method removeNode, removes a node from the linked list
+* Takes single parameter value, representing the data you want to be removed from the list
+* Returns ListNode<T>* representing the node that was removed from the linked list
+*/
 template <class T>
 ListNode<T>* SingleLinkedList<T>::removeNode(T value){
     ListNode<T>* node = find(value); //find the node and verify it exists
@@ -175,6 +214,9 @@ ListNode<T>* SingleLinkedList<T>::removeNode(T value){
     return curr;
 }
 
+/*
+* method printList, prints a visual representation of the linked list
+*/
 template <class T>
 void SingleLinkedList<T>::printList(){
     ListNode<T>* curr = front;
@@ -194,11 +236,5 @@ void SingleLinkedList<T>::printList(){
     }
 }
 
-// void SingleLinkedLIst::insertBack(int d){
-//     ListNode *node = new ListNode;
-
-//     node->next = NULL;
-
-// }
 
 #endif
