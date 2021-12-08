@@ -248,9 +248,9 @@ void Simulation::runSimulation(){
             cout << "Press any key to continue..." << endl;
             cin.ignore();
             cin.ignore();
-        } else if(input == "9") {
+        } else if(input == "9") { // if their option is 9
             cout << string(50, '\n');
-            cout << "Add a new faculty member" << endl;
+            cout << "Add a new faculty member" << endl; //add new faculty member
             cout << "Please input faculty ID: ";
             cin.ignore();
             string id;
@@ -278,7 +278,7 @@ void Simulation::runSimulation(){
             int adviseeID;
             SingleLinkedList<int>* adviseeIDList = new SingleLinkedList<int>();
 
-            if(!adviseeList.empty()){
+            if(!adviseeList.empty()){ //this takes string of advisee id split up by spaces and adds the ids to the advisee list
                 string word;
                 for(int i = 0; i < adviseeList.length(); ++i){
                     if(!isspace(adviseeList[i])){
@@ -292,6 +292,18 @@ void Simulation::runSimulation(){
 
                 adviseeID = stol(word);
                 adviseeIDList->insertFront(adviseeID);
+            }
+
+            ListNode<int>* curr = adviseeIDList->getFront();
+            for(int i = 0; i < adviseeIDList->getSize(); ++i){ //makes sure the student exists in the student table before adding it to the advisee list
+                if(db->findStudent(curr->data) == nullptr){
+                    cout << "Student " << curr->data << " does not exist and cannot add that student into advisee list" << endl;
+                    adviseeIDList->removeNode(curr->data);
+                } else {
+                    
+                }
+
+                curr = curr->next;
             }
 
             if (isInteger(id)){
