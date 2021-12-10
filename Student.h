@@ -1,3 +1,16 @@
+/* 
+Derek Norman
+2364922
+norman@chapman.edu
+CPSC-350-03
+Assignment 6
+
+Using two late days for this assignment!
+*/
+
+/*
+* Student class representing a simple Student in a database
+*/
 #ifndef STUDENT_H
 #define STUDENT_H
 

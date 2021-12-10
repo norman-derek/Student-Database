@@ -1,3 +1,16 @@
+/* 
+Derek Norman
+2364922
+norman@chapman.edu
+CPSC-350-03
+Assignment 6
+
+Using two late days for this assignment!
+*/
+
+/*
+* Faculty class representing a simple Faculty member in a database
+*/
 #include "Faculty.h"
 
 Faculty::Faculty(){ //constructor
@@ -105,10 +118,12 @@ void Faculty::setAdviseeList(SingleLinkedList<int> *adviseeList){
 }
 
 /*
-*
+* method equalTo, checks if a faculty member is equal to another faculty member
+* Takes single parameter other, representing the other faculty member
+* Returns a bool representing whether or not the faculty members are equal 
 */
 bool Faculty::equalTo(Faculty *other){
-    if(m_facultyID == other->getID()){
+    if(m_facultyID == other->getID()){ //compares ID of the faculty and if the same it returns true
         return true;
     }
 
@@ -116,10 +131,12 @@ bool Faculty::equalTo(Faculty *other){
 }
 
 /*
-*
+* method lessThan, checks if a faculty ID is less than another faculty ID
+* Takes single parameter other, representing the other faculty member
+* Returns a bool representing whether or not the faculty member id is less than the other faculty members
 */
 bool Faculty::lessThan(Faculty *other){
-    if(m_facultyID < other->getID()){
+    if(m_facultyID < other->getID()){ //compares IDs of the faculty and if the current object id is less than the other id then it returns true
         return true;
     }
 
@@ -127,18 +144,22 @@ bool Faculty::lessThan(Faculty *other){
 }
 
 /*
-*
+* method greaterThan, checks if a faculty ID is greater than another faculty ID
+* Takes single parameter other, representing the other faculty member
+* Returns a bool representing whether or not the faculty member id is greater than the other faculty members
 */
-bool Faculty::greaterThan(Faculty *other){
-    if(m_facultyID > other->getID()){
+bool Faculty::greaterThan(Faculty *other){ 
+    if(m_facultyID > other->getID()){ //compares ids of the faculty and if the current Faculty ID is greater than the other faculty ID and if it is returns true 
         return true;
     }
 
     return false;
 }
 
+/*
+* method Print, prints a visual representation of the Faculty
+*/
 void Faculty::Print(){
-    int listSize = sizeof(m_adviseeIDList)/sizeof(m_adviseeIDList[0]);
     cout << "Faculty [" << endl;
     cout << "Name: " << m_name << endl;
     cout << "ID: " << m_facultyID << endl;

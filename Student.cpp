@@ -1,3 +1,16 @@
+/* 
+Derek Norman
+2364922
+norman@chapman.edu
+CPSC-350-03
+Assignment 6
+
+Using two late days for this assignment!
+*/
+
+/*
+* Student class representing a simple Student in a database
+*/
 #include "Student.h"
 
 Student::Student(){ //constructor
@@ -118,7 +131,11 @@ void Student::setAdvisorID(int advisorID){
     m_advisorID = advisorID;
 }
 
-
+/*
+* method equalTo, checks if a student is equal to another student
+* Takes single parameter other, representing the other student
+* Returns a bool representing whether or not the students are equal 
+*/
 bool Student::equalTo(Student *other){
     if(m_studentID == other->getID()){
         return true;
@@ -127,6 +144,11 @@ bool Student::equalTo(Student *other){
     return false;
 }
 
+/*
+* method lessThan, checks if a student id is less than another students id
+* Takes a single paramter other, representing the other student
+* Returns a bool representing whether or not the students id is less than the other students id
+*/
 bool Student::lessThan(Student *other){
     if(m_studentID < other->getID()){
         return true;
@@ -135,6 +157,11 @@ bool Student::lessThan(Student *other){
     return false;
 }
 
+/*
+* method greaterThan, checks if a student id is greater than another students id
+* Takes a single paramter other, representing the other student
+* Returns a bool representing whether or not the students id is greater than the other students id
+*/
 bool Student::greaterThan(Student *other){
     if(m_studentID > other->getID()){
         return true;
@@ -144,6 +171,9 @@ bool Student::greaterThan(Student *other){
 }
 
 
+/*
+* method Print, prints a visual representation of the Student 
+*/
 void Student::Print(){
     cout << "[ Student Name: " << m_name << ", " << endl;
     cout << "Student ID: " << m_studentID << ", " << endl;

@@ -3,7 +3,9 @@ Derek Norman
 2364922
 norman@chapman.edu
 CPSC-350-03
-Assignment 5
+Assignment 6
+
+Using two late days for this assignment!
 */
 
 /*
@@ -78,8 +80,6 @@ SingleLinkedList<T>::SingleLinkedList(){ //constructor
 
 template <class T>
 SingleLinkedList<T>::~SingleLinkedList(){ //destructor
-    //research 
-    //hint: theres a loop
     ListNode<T>* curr = front;
     while( curr != NULL){
         ListNode<T>* next = curr->next;

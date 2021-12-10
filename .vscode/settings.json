@@ -5,6 +5,8 @@
         "__node_handle": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "filesystem": "cpp",
+        "iosfwd": "cpp"
     }
 }

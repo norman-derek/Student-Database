@@ -1,3 +1,16 @@
+/* 
+Derek Norman
+2364922
+norman@chapman.edu
+CPSC-350-03
+Assignment 6
+
+Using two late days for this assignment!
+*/
+
+/*
+* Database class, simple representation of a database
+*/
 #ifndef DATABASE_H
 #define DATABASE_H
 

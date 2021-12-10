@@ -3,7 +3,9 @@ Derek Norman
 2364922
 norman@chapman.edu
 CPSC-350-03
-Assignment 5
+Assignment 6
+
+Using two late days for this assignment!
 */
 
 /*
@@ -16,9 +18,9 @@ Assignment 5
 int main(int argc, char** argv)
 {
 
-    Simulation *sim = new Simulation();
+    Simulation *sim = new Simulation(); 
 
-    sim->runSimulation();
+    sim->runSimulation(); //runs simulation
     
     delete sim;
     return 0;

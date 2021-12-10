@@ -19,7 +19,7 @@
 
 
 
-3) Program runs and compiles but I did not complete the portion of the assignment to read from files to build faculty and student tables, save program state so     that you can leave off where you left off, and rollback.
+3) Program runs and compiles but I did not complete the portion of the assignment to read from files to build faculty and student tables, save program state so that you can start where you left off, and rollback.
 
 4)  N/A
 
@@ -28,3 +28,5 @@
         make all \
     To Run: \
         ./assignment6.out
+
+6) Using 2 late days for this assignment! Thank you!

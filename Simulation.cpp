@@ -1,3 +1,16 @@
+/* 
+Derek Norman
+2364922
+norman@chapman.edu
+CPSC-350-03
+Assignment 6
+
+Using two late days for this assignment!
+*/
+
+/*
+* Simulation class, simple class representing a simple simulation 
+*/
 #include "Simulation.h"
 
 Simulation::Simulation(){ //constructor
@@ -389,4 +402,12 @@ bool Simulation::isInteger(string s){
 
     return true;
 
+}
+
+//idk yet
+void Simulation::fileProcessor(string studentFile, string facultyFile){
+    
+    ifstream studentTable;
+    ifstream facultyTable;
+    //idk really 
 }

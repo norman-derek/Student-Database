@@ -3,7 +3,9 @@ Derek Norman
 2364922
 norman@chapman.edu
 CPSC-350-03
-Assignment 5
+Assignment 6
+
+Using two late days for this assignment!
 */
 
 /*

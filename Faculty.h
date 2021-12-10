@@ -1,3 +1,16 @@
+/* 
+Derek Norman
+2364922
+norman@chapman.edu
+CPSC-350-03
+Assignment 6
+
+Using two late days for this assignment!
+*/
+
+/*
+* Faculty class representing a simple Faculty member in a database
+*/
 #ifndef FACULTY_H
 #define FACULTY_H
 
