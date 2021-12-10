@@ -21,7 +21,7 @@
 
 3) Program runs and compiles but I did not complete the portion of the assignment to read from files to build faculty and student tables, save program state so that you can start where you left off, and rollback.
 
-4)  N/A
+4)  Zybooks Chapter 4 Section 7 BST inorder Traversal
 
     
 5)  To compile: \
